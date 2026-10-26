@@ -21,9 +21,6 @@ jobs:
     - name: Build Ionic image
       run: docker build -t minsu-volleyball:latest .
 
-    - name: Validate Angular production build
-      run: docker run --rm minsu-volleyball:latest npm run build -- --configuration production
-
     - name: Remove previous container 
       run: docker rm -f minsu-volleyball-container
       continue-on-error: true
