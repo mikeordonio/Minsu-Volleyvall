@@ -1,0 +1,91 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+
+:root {
+	--minsu-forest: #075b3a;
+	--minsu-forest-deep: #043b27;
+	--minsu-forest-soft: #e3eee6;
+	--minsu-gold: #d9a62e;
+	--minsu-gold-deep: #a97808;
+	--minsu-cream: #ffffff;
+	--minsu-ink: #17372a;
+	--ion-background-color: var(--minsu-cream);
+	--ion-background-color-rgb: 248, 241, 223;
+	--ion-text-color: var(--minsu-ink);
+	--ion-text-color-rgb: 23, 55, 42;
+	--ion-color-primary: var(--minsu-forest);
+	--ion-color-primary-rgb: 7, 91, 58;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-secondary: var(--minsu-gold);
+	--ion-color-secondary-rgb: 217, 166, 46;
+	--ion-color-secondary-contrast: var(--minsu-forest-deep);
+	--ion-color-tertiary: #b78214;
+	--ion-color-light: var(--minsu-forest-soft);
+	--ion-color-light-shade: #cbdccf;
+	--ion-color-medium-shade: #52675b;
+	--ion-color-dark: var(--minsu-forest-deep);
+}
+
+body {
+	background: var(--minsu-cream);
+	font-family: Georgia, 'Times New Roman', serif;
+}
+
+ion-app,
+ion-content {
+	--background: var(--minsu-cream);
+	background: var(--minsu-cream);
+}
+
+ion-toolbar {
+	--background: var(--minsu-forest);
+	--color: #ffffff;
+	--border-color: var(--minsu-gold);
+}
+
+ion-button {
+	--background: var(--minsu-gold);
+	--background-hover: var(--minsu-gold-deep);
+	--color: var(--minsu-forest-deep);
+	font-weight: 700;
+}
+
+ion-searchbar {
+	--background: #fffaf0;
+	--border-radius: 8px;
+	--box-shadow: 0 1px 0 rgba(7, 91, 58, 0.12);
+}

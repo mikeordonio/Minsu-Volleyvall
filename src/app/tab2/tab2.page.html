@@ -1,0 +1,86 @@
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshRoster($event)">
+    <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
+  <div class="page-shell">
+    <p class="eyebrow">MinSU Volleyball</p>
+    <h1>Team roster</h1>
+  
+
+    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Search by name, course, or position" show-clear-button="focus"></ion-searchbar>
+    <ion-segment [(ngModel)]="selectedTeam">
+      <ion-segment-button value="All"><ion-label>All</ion-label></ion-segment-button>
+      <ion-segment-button value="Mens"><ion-label>Mens</ion-label></ion-segment-button>
+      <ion-segment-button value="Womens"><ion-label>Womens</ion-label></ion-segment-button>
+    </ion-segment>
+
+    @if (loading) {
+      <div class="loading-state" role="status" aria-live="polite">
+        <ion-spinner class="loading"></ion-spinner>
+        <span>Loading roster...</span>
+      </div>
+    }
+    @if (errorMessage) {
+      <ion-text color="danger"><p>{{ errorMessage }}</p></ion-text>
+    }
+    @if (!loading && !errorMessage && visiblePlayers.length === 0) {
+      <p class="empty-state">No players in this team yet.</p>
+    }
+
+    <div class="roster-list">
+      @for (player of visiblePlayers; track player.id) {
+      <ion-card class="roster-card">
+        <ion-card-content>
+        <div class="player-row">
+          <div class="player-number">{{ player.jerseyNumber }}</div>
+          <div class="player-info">
+            <strong>{{ player.name }}</strong>
+            <div class="player-meta">
+              <ion-chip color="primary"><ion-icon class="team-icon" [class.mens-team]="player.team === 'Mens'" [class.womens-team]="player.team === 'Womens'" name="people-outline"></ion-icon><ion-label class="team-label" [class.mens-team]="player.team === 'Mens'" [class.womens-team]="player.team === 'Womens'">{{ player.team }}</ion-label></ion-chip>
+              <ion-badge color="tertiary">{{ player.position }}</ion-badge>
+            </div>
+            <small><ion-icon name="school-outline"></ion-icon> {{ player.course }} · {{ player.yearLevel }}</small>
+          </div>
+          <div class="row-actions">
+            <ion-button fill="clear" size="small" (click)="startEditing(player)" aria-label="Edit player">Edit</ion-button>
+            <ion-button fill="clear" color="danger" size="small" (click)="confirmDelete(player)" aria-label="Delete player">Delete</ion-button>
+          </div>
+        </div>
+        </ion-card-content>
+      </ion-card>
+      }
+    </div>
+  </div>
+
+  <ion-modal [isOpen]="isEditModalOpen" (didDismiss)="cancelEditing()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Edit player</ion-title>
+          <ion-buttons slot="end"><ion-button (click)="cancelEditing()">Close</ion-button></ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      @if (editingPlayer) {
+      <ion-content class="ion-padding">
+        <form class="edit-form" (ngSubmit)="savePlayer()">
+          <ion-input label="Name" labelPlacement="stacked" name="editName" [(ngModel)]="editingPlayer.name"></ion-input>
+          <ion-input label="Course" labelPlacement="stacked" name="editCourse" [(ngModel)]="editingPlayer.course"></ion-input>
+          <ion-select label="Team" labelPlacement="stacked" name="editTeam" [(ngModel)]="editingPlayer.team">
+            <ion-select-option value="Mens">Mens</ion-select-option><ion-select-option value="Womens">Womens</ion-select-option>
+          </ion-select>
+          <ion-input type="number" label="Jersey" labelPlacement="stacked" name="editJersey" [(ngModel)]="editingPlayer.jerseyNumber"></ion-input>
+          <ion-select label="Position" labelPlacement="stacked" name="editPosition" [(ngModel)]="editingPlayer.position">
+            <ion-select-option value="Setter">Setter</ion-select-option><ion-select-option value="Outside Hitter">Outside Hitter</ion-select-option><ion-select-option value="Middle Blocker">Middle Blocker</ion-select-option><ion-select-option value="Opposite">Opposite</ion-select-option><ion-select-option value="Libero">Libero</ion-select-option>
+          </ion-select>
+          <ion-select label="Year level" labelPlacement="stacked" name="editYear" [(ngModel)]="editingPlayer.yearLevel">
+            <ion-select-option value="1st Year">1st Year</ion-select-option><ion-select-option value="2nd Year">2nd Year</ion-select-option><ion-select-option value="3rd Year">3rd Year</ion-select-option><ion-select-option value="4th Year">4th Year</ion-select-option>
+          </ion-select>
+          <ion-button expand="block" type="submit">Save changes</ion-button>
+        </form>
+      </ion-content>
+      }
+    </ng-template>
+  </ion-modal>
+  <ion-loading [isOpen]="loading" message="Loading roster..."></ion-loading>
+  <ion-toast position="top" [isOpen]="toastOpen" [message]="toastMessage" [duration]="1500" (didDismiss)="toastOpen = false"></ion-toast>
+</ion-content>

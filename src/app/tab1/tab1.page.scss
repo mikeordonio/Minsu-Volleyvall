@@ -1,0 +1,46 @@
+.page-shell {
+	max-width: 720px;
+	margin: 0 auto;
+	padding: 32px 20px 48px;
+}
+
+.eyebrow {
+	margin: 0 0 8px;
+	color: var(--ion-color-primary);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+h1 {
+	margin: 0;
+	color: var(--ion-color-dark);
+	font-size: clamp(2rem, 7vw, 3.2rem);
+	line-height: 1.05;
+}
+
+.intro {
+	margin: 12px 0 28px;
+	color: var(--ion-color-medium-shade);
+}
+
+ion-list {
+	margin-bottom: 24px;
+	border: 1px solid var(--ion-color-light-shade);
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+ion-card {
+	margin: 0;
+	--background: #fffaf0;
+	border: 1px solid var(--ion-color-light-shade);
+	border-top: 4px solid var(--minsu-gold);
+	box-shadow: none;
+}
+
+ion-button {
+	--border-radius: 8px;
+	min-height: 48px;
+}

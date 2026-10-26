@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div class="page-shell">
+    <p class="eyebrow">MinSU Volleyball</p>
+    <h1>Add a roster player</h1>
+    <p></p>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Player details</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      <form (ngSubmit)="createPlayer()">
+        <ion-list lines="full">
+        <ion-item>
+          <ion-input label="Full name" labelPlacement="stacked" name="name" [(ngModel)]="player.name" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Course / program" labelPlacement="stacked" name="course" [(ngModel)]="player.course" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Team" labelPlacement="stacked" name="team" [(ngModel)]="player.team">
+            <ion-select-option value="Mens">Mens</ion-select-option>
+            <ion-select-option value="Womens">Womens</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input type="number" label="Jersey number" labelPlacement="stacked" name="jerseyNumber" [(ngModel)]="player.jerseyNumber" min="0" max="99"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Position" labelPlacement="stacked" name="position" [(ngModel)]="player.position">
+            <ion-select-option value="Setter">Setter</ion-select-option>
+            <ion-select-option value="Outside Hitter">Outside Hitter</ion-select-option>
+            <ion-select-option value="Middle Blocker">Middle Blocker</ion-select-option>
+            <ion-select-option value="Opposite">Opposite</ion-select-option>
+            <ion-select-option value="Libero">Libero</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Year level" labelPlacement="stacked" name="yearLevel" [(ngModel)]="player.yearLevel">
+            <ion-select-option value="1st Year">1st Year</ion-select-option>
+            <ion-select-option value="2nd Year">2nd Year</ion-select-option>
+            <ion-select-option value="3rd Year">3rd Year</ion-select-option>
+            <ion-select-option value="4th Year">4th Year</ion-select-option>
+          </ion-select>
+        </ion-item>
+        </ion-list>
+        <ion-button expand="block" type="submit" [disabled]="saving">
+          {{ saving ? 'Adding player...' : 'Add to roster' }}
+        </ion-button>
+      </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-loading [isOpen]="saving" message="Adding player..."></ion-loading>
+  <ion-toast position="top" [isOpen]="toastOpen" [message]="toastMessage" [duration]="1500" (didDismiss)="toastOpen = false"></ion-toast>
+</ion-content>
