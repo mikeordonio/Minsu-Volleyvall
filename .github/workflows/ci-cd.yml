@@ -22,7 +22,7 @@ jobs:
       run: docker build -t minsu-volleyball:latest .
 
     - name: Remove previous container 
-      run: docker rm -f minsu-volleball-container
+      run: docker rm -f minsu-volleyball-container
       continue-on-error: true
 
     - name: Start updated container
