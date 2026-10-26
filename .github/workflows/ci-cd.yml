@@ -4,7 +4,7 @@ name: Deploy Ionic App Locally
 on:
   push:
     branches: [main]
-    workflow_dispatch:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -32,7 +32,7 @@ jobs:
       shell: powershell
       run: |
         $success = $false
-        for ($i = l; $i -le 15; $i++) {
+        for ($i = 1; $i -le 15; $i++) {
           try {
             Invoke-WebRequest http://localhost:8100/ -UseBasicParsing -TimeoutSec 2 | Out-Null
             $success = $true
