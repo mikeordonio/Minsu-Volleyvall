@@ -26,8 +26,8 @@ jobs:
       continue-on-error: true
 
     - name: Start updated container
-      run: docker run -d --name minsu-volleball --restart unless-stopped -p 8100:8100 minsu-volleball:latest
-
+      run: docker run -d --name minsu-volleyball-container --restart unless-stopped -p 8100:8100 minsu-volleyball
+      
     - name: Verify app
       shell: powershell
       run: |
